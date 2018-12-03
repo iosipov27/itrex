@@ -30,6 +30,10 @@
   border-color: #0275d8 #fff #0275d8 #0275d8;
 }
 
+.nav-item a  {
+  text-transform: capitalize;
+}
+
 .list-group {
   position: relative;
 }
@@ -42,4 +46,8 @@
 
 .container {
   margin-top: 50px;
+}
+
+input.ng-invalid {
+  border: 1px solid red;
 }

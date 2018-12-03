@@ -46,17 +46,9 @@
 
       <div class="col-3">
         <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
-          <li class="nav-item">
-            <a href="#flights" class="nav-link" ng-class="{active: ctrl.isPanelActive('flights')}" ng-click="ctrl.setActivePanel('flights')"><i
-                class="fa fa-plane" aria-hidden="true"></i> Flights</a>
-          </li>
-          <li class="nav-item">
-            <a href="#cars" class="nav-link" ng-class="{active: ctrl.isPanelActive('cars')}" ng-click="ctrl.setActivePanel('cars')"><i
-                class="fa fa-car" aria-hidden="true"></i> Cars</a>
-          </li>
-          <li class="nav-item">
-            <a href="#hotels" class="nav-link" ng-class="{active: ctrl.isPanelActive('hotels')}" ng-click="ctrl.setActivePanel('hotels')"><i
-                class="fa fa-hotel" aria-hidden="true"></i> Hotels</a>
+          <li class="nav-item" ng-repeat="nav in ctrl.navList">
+            <a href="#{{ ::nav.label }}" class="nav-link" ng-class="{active: ctrl.isPanelActive(nav.label)}" ng-click="ctrl.setActivePanel(nav.label)"><i
+                class="{{ ::nav.icon }}" aria-hidden="true"></i> {{ ::nav.label }}</a>
           </li>
         </ul>
       </div>
@@ -69,11 +61,11 @@
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label for="startDate">Start Date</label>
-                  <input type="text" id="startDate" class="form-control" ng-model="vm.startDate" datepicker type="date" />
+                  <input type="text" id="startDate" class="form-control" ng-model="vm.startDate" datepicker required type="date" />
                 </div>
                 <div class="form-group col-md-6">
                   <label for="endDate">End Date</label>
-                  <input type="text" id="endDate" class="form-control" ng-model="vm.endDate" datepicker />
+                  <input type="text" id="endDate" class="form-control" ng-model="vm.endDate" required datepicker type="date"/>
                 </div>
               </div>
 

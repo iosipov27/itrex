@@ -1,9 +1,13 @@
 angular.module('bookingApp').controller('AppCtrl',
-    ['$scope', 'DataExchangeService', 'LogService', '$sce', 
+    ['$scope', 'DataExchangeService', 'LogService', '$sce',
         function ($scope, DataExchangeService, LogService, $sce) {
 
             let vm = {};
             let activePanel = 'flights';
+            this.navList = [
+                { label: 'flights', icon: 'fa fa-plane' },
+                { label: 'cars', icon: 'fa fa-car' },
+                { label: 'hotels', icon: 'fa fa-hotel' }];
             $scope.vm = vm;
 
             init();
