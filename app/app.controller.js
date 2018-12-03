@@ -20,6 +20,7 @@ angular.module('bookingApp').controller('AppCtrl',
             this.search = function () {
                 let formData = angular.extend(DataExchangeService.get('internalFormData'), { startDate: vm.startDate, endDate: vm.endDate });
                 LogService.push(formData);
+                this.clear();
                 init();
             }
 

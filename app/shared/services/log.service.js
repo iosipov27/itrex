@@ -14,20 +14,20 @@ angular.module('sharedModule').factory('LogService', function () {
 
         storedData.push(dataItem);
         saveData(storedData);
-    }
+    };
 
     LogService.removeByIndex = function (ind) {
         let storedData = getStoredData();
 
         storedData.splice(ind, 1);
         saveData(storedData);
-    }
+    };
 
     LogService.get = getStoredData;
 
     LogService.clear = function () {
         localStorage.clear();
-    }
+    };
 
     return LogService;
 });
