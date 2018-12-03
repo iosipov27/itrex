@@ -1,25 +1,29 @@
 angular.module('sharedModule').factory('LogService', function () {
     let LogService = Object.create(null);
-    
-    LogService.set = function (fieldName, data) {
-        localStorage.setItem(fieldName, JSON.stringify(data));
+
+    function getStoredData() {
+        return JSON.parse(localStorage.getItem("storedData")) || [];
+    }
+
+    function saveData(data) {
+        localStorage.setItem('storedData', JSON.stringify(data));
     }
 
     LogService.push = function (dataItem) {
-        let storedData = JSON.parse(localStorage.getItem("storedData")) || [];
+        let storedData = getStoredData();
+
         storedData.push(dataItem);
-        localStorage.setItem('storedData', JSON.stringify(storedData));
+        saveData(storedData);
     }
 
     LogService.removeByIndex = function (ind) {
-        let storedData = JSON.parse(localStorage.getItem("storedData")) || [];
+        let storedData = getStoredData();
+
         storedData.splice(ind, 1);
-        localStorage.setItem('storedData', JSON.stringify(storedData));
+        saveData(storedData);
     }
 
-    LogService.get = function () {
-        return JSON.parse(localStorage.getItem("storedData")) || [];
-    }
+    LogService.get = getStoredData;
 
     LogService.clear = function () {
         localStorage.clear();
