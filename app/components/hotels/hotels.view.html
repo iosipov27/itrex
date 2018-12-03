@@ -1,9 +1,9 @@
 <div class="form-group">
-    <label for="exampleFormControlSelect1">Amenities</label>
-    <select class="form-control" ng-model="vmHotCtrl.hotelRating">
+    <label for="hotelRating">Amenities</label>
+    <select class="form-control" ng-model="vmHotCtrl.hotelRating" id="hotelRating">
         <option ng-repeat="option in vmHotCtrl.ratings" value="{{::option.value}}" ng-bind-html="option.label"></option>
     </select>
 
-    <label for="startDate">Location</label>
-    <input type="text" class="form-control" ng-model="vmHotCtrl.location" />
+    <label for="hotelLocation">Location</label>
+    <input type="text" class="form-control" ng-model="vmHotCtrl.location" id="hotelLocation" />
 </div>
