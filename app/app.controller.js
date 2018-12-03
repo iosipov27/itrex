@@ -3,7 +3,7 @@ angular.module('bookingApp').controller('AppCtrl',
         function ($scope, DataExchangeService, LogService, $sce) {
 
             let vm = {};
-            let activePanel;
+            let activePanel = 'flights';
             $scope.vm = vm;
 
             init();
@@ -14,7 +14,6 @@ angular.module('bookingApp').controller('AppCtrl',
                     }
                     return item;
                 });
-                activePanel = 'flights';
             }
 
             this.search = function () {
