@@ -1,6 +1,6 @@
 angular.module('bookingApp').controller('AppCtrl',
-    ['$scope', 'DataExchangeService', 'LogService', '$sce', 'HelperService',
-        function ($scope, DataExchangeService, LogService, $sce, HelperService) {
+    ['$scope', 'DataExchangeService', 'LogService', '$sce', 
+        function ($scope, DataExchangeService, LogService, $sce) {
 
             let vm = {};
             let activePanel;
@@ -41,7 +41,5 @@ angular.module('bookingApp').controller('AppCtrl',
             this.setActivePanel = function (panelName) {
                 activePanel = panelName;
             }
-
-            this.formatDate = HelperService.formatDate;
 
         }]);

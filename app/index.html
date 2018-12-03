@@ -28,9 +28,9 @@
   <script src="shared/services/log.service.js"></script>
   <script src="shared/services/hotels.services.js"></script>
   <script src="shared/services/cars.service.js"></script>
-  <script src="shared/services/helper.service.js"></script>
 
   <script src="shared/directives/datepicker.directive.js"></script>
+  <script src="shared/filters/formattedDate.filter.js"></script>
 
   <script src="components/flights/flights.controller.js"></script>
   <script src="components/cars/cars.controller.js"></script>
@@ -47,13 +47,16 @@
       <div class="col-3">
         <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
           <li class="nav-item">
-            <a href="#flights" class="nav-link" ng-class="{active: ctrl.isPanelActive('flights')}" ng-click="ctrl.setActivePanel('flights')"><i class="fa fa-plane" aria-hidden="true"></i> Flights</a>
+            <a href="#flights" class="nav-link" ng-class="{active: ctrl.isPanelActive('flights')}" ng-click="ctrl.setActivePanel('flights')"><i
+                class="fa fa-plane" aria-hidden="true"></i> Flights</a>
           </li>
           <li class="nav-item">
-            <a href="#cars" class="nav-link" ng-class="{active: ctrl.isPanelActive('cars')}" ng-click="ctrl.setActivePanel('cars')"><i class="fa fa-car" aria-hidden="true"></i> Cars</a>
+            <a href="#cars" class="nav-link" ng-class="{active: ctrl.isPanelActive('cars')}" ng-click="ctrl.setActivePanel('cars')"><i
+                class="fa fa-car" aria-hidden="true"></i> Cars</a>
           </li>
           <li class="nav-item">
-            <a href="#hotels" class="nav-link" ng-class="{active: ctrl.isPanelActive('hotels')}" ng-click="ctrl.setActivePanel('hotels')"><i class="fa fa-hotel" aria-hidden="true"></i> Hotels</a>
+            <a href="#hotels" class="nav-link" ng-class="{active: ctrl.isPanelActive('hotels')}" ng-click="ctrl.setActivePanel('hotels')"><i
+                class="fa fa-hotel" aria-hidden="true"></i> Hotels</a>
           </li>
         </ul>
       </div>
@@ -96,21 +99,20 @@
           <li class="list-group-item" ng-repeat="log in vm.logs" ng-switch on="log.type">
             <div ng-switch-when='flights'>
               <i class="fa fa-plane" aria-hidden="true"></i>
-              <span>&nbsp;{{ ::ctrl.formatDate(log.startDate) | date: 'MMMM dd' }} -
-                {{ ctrl.formatDate(log.endDate) | date: 'MMMM dd' }}, {{ ::log.fromDate }} - {{ ::log.toDate }}
+              <span>&nbsp;{{ ::log.startDate | formattedDate : 'MMMM dd' }} - {{ ::log.endDate | formattedDate : 'MMMM dd' }}, {{
+                ::log.fromDate }} - {{ ::log.toDate }}
               </span>
             </div>
             <div ng-switch-when='cars'>
               <i class="fa fa-car" aria-hidden="true"></i>
-              <span>&nbsp;{{ ::ctrl.formatDate(log.startDate) | date: 'MMMM dd' }} -
-                {{ ctrl.formatDate(log.endDate) | date: 'MMMM dd' }}, {{ ::log.carType }} - {{ ::log.location }}
+              <span>&nbsp;{{ ::log.startDate | formattedDate : 'MMMM dd' }} - {{ ::log.endDate | formattedDate : 'MMMM dd' }}, {{ ::log.carType
+                }} - {{ ::log.location }}
               </span>
             </div>
             <div ng-switch-when='hotels'>
               <i class="fa fa-bed" aria-hidden="true"></i>
-              <span>&nbsp;{{ ::ctrl.formatDate(log.startDate) | date: 'MMMM dd' }} -
-                {{ ctrl.formatDate(log.endDate) | date: 'MMMM dd' }}, <span ng-bind-html="log.hotelRating"></span> - {{
-                ::log.location }}
+              <span>&nbsp;{{ ::log.startDate | formattedDate : 'MMMM dd' }} - {{ ::log.endDate | formattedDate : 'MMMM dd' }}, <span
+                  ng-bind-html="log.hotelRating"></span> - {{ ::log.location }}
               </span>
 
             </div>
