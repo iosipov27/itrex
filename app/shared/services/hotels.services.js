@@ -1,5 +1,4 @@
-angular.module('sharedModule').factory('HotelsService', function () {
-    let HotelsService = Object.create(null);
+angular.module('sharedModule').service('HotelsService', function () {
     let mockData = [
         { label: '&#9733; and higher', value: '&#9733;' },
         { label: '&#9733; &#9733; and higher', value: '&#9733; &#9733;' },
@@ -8,9 +7,7 @@ angular.module('sharedModule').factory('HotelsService', function () {
         { label: '&#9733; &#9733; &#9733; &#9733; &#9733; and higher', value: '&#9733; &#9733; &#9733; &#9733; &#9733;' }
     ]
     
-    HotelsService.getRatingsList = function () {
+    this.getRatingsList = function () {
         return mockData;
     }
-
-    return HotelsService;
 });

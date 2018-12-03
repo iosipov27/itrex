@@ -1,18 +1,15 @@
-angular.module('sharedModule').factory('DataExchangeService', function () {
-    let DataExchangeService = Object.create(null);
-    DataExchangeService._data = Object.create(null);
+angular.module('sharedModule').service('DataExchangeService', function () {
+    this._data = Object.create(null);
     
-    DataExchangeService.set = function (fieldName, data) {
+    this.set = function (fieldName, data) {
         this._data[fieldName] = data;
     }
 
-    DataExchangeService.get = function (fieldName) {
+    this.get = function (fieldName) {
         return this._data[fieldName];
     }
 
-    DataExchangeService.clear = function () {
+    this.clear = function () {
         this._data = {};
     }
-
-    return DataExchangeService;
 });

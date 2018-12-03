@@ -1,5 +1,4 @@
-angular.module('sharedModule').factory('LogService', function () {
-    let LogService = Object.create(null);
+angular.module('sharedModule').service('LogService', function () {
 
     function getStoredData() {
         return JSON.parse(localStorage.getItem("storedData")) || [];
@@ -9,25 +8,23 @@ angular.module('sharedModule').factory('LogService', function () {
         localStorage.setItem('storedData', JSON.stringify(data));
     }
 
-    LogService.push = function (dataItem) {
+    this.push = function (dataItem) {
         let storedData = getStoredData();
 
         storedData.push(dataItem);
         saveData(storedData);
     };
 
-    LogService.removeByIndex = function (ind) {
+    this.removeByIndex = function (ind) {
         let storedData = getStoredData();
 
         storedData.splice(ind, 1);
         saveData(storedData);
     };
 
-    LogService.get = getStoredData;
+    this.get = getStoredData;
 
-    LogService.clear = function () {
+    this.clear = function () {
         localStorage.clear();
     };
-
-    return LogService;
 });

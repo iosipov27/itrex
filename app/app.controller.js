@@ -20,7 +20,10 @@ angular.module('bookingApp').controller('AppCtrl',
                 });
             }
 
-            this.search = function () {
+            this.search = function (bookingForm) {
+                if (!bookingForm.$valid) return;
+                bookingForm.$setUntouched();
+
                 let formData = angular.extend(DataExchangeService.get('internalFormData'), { startDate: vm.startDate, endDate: vm.endDate });
                 LogService.push(formData);
                 this.clear();
