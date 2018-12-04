@@ -1,7 +1,8 @@
 let gulp = require('gulp'),
     concat = require('gulp-concat'),
     minify = require('gulp-minify'),
-    inject = require('gulp-inject');
+    inject = require('gulp-inject'),
+    cleanCSS = require('gulp-clean-css');
 
 
 let scriptsList = [
@@ -51,6 +52,7 @@ gulp.task('fonts', () => {
 gulp.task('css', () => {
     gulp.src(stylesList)
         .pipe(concat('styles.css'))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(gulp.dest('./dist'));
 });
 
