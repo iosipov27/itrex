@@ -1,4 +1,4 @@
-angular.module('sharedModule').service('LogService', function () {
+angular.module('bookingComponentsModule').service('LogService', function () {
 
     function getStoredData() {
         return JSON.parse(localStorage.getItem("storedData")) || [];

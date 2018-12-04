@@ -1,4 +1,4 @@
-angular.module('sharedModule').service('CarsService', function () {
+angular.module('bookingComponentsModule').service('CarsService', function () {
 
     let mockData = [
         { label: 'Economy', value: 'Economy' },

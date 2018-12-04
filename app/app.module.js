@@ -2,6 +2,5 @@
 
 angular.module('bookingApp', [
     'ngRoute',
-    'bookingComponentsModule',
-    'sharedModule'
+    'bookingComponentsModule'
 ]);

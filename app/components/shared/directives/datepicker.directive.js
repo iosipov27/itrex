@@ -1,4 +1,4 @@
-angular.module('sharedModule').directive('datepicker', () => {
+angular.module('bookingComponentsModule').directive('datepicker', () => {
     return {
         restrict: 'A',
         link: function (scope, element, attrs) {

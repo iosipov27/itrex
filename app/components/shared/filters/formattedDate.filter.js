@@ -1,4 +1,4 @@
-angular.module('sharedModule').filter('formattedDate', ($filter) => {
+angular.module('bookingComponentsModule').filter('formattedDate', ['$filter', ($filter) => {
     var dateFilter = $filter('date');
 
     function formatDate(date) {
@@ -9,4 +9,4 @@ angular.module('sharedModule').filter('formattedDate', ($filter) => {
     return function (dateString, attr) {
         return dateFilter(formatDate(dateString), attr);
     }
-});
+}]);

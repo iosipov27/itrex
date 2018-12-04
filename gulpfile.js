@@ -1,7 +1,6 @@
 let gulp = require('gulp'),
     concat = require('gulp-concat'),
-    ngAnnotate = require('gulp-ng-annotate')
-    eslint = require('gulp-eslint')
+    minify = require('gulp-minify'),
     inject = require('gulp-inject');
 
 
@@ -15,13 +14,11 @@ let scriptsList = [
     './app/app.config.js',
     './app/shared/shared.module.js',
     './app/app.controller.js',
-    './components/components.module.js',
+    './app/components/components.module.js',
 
-    './app/shared/services/*.js',
-
-    './app/shared/directives/*.js',
-
-    './app/shared/filters/*.js',
+    './app/components/shared/services/*.js',
+    './app/components/shared/directives/*.js',
+    './app/components/shared/filters/*.js',
 
     './app/components/**/*.js'
 ];
@@ -35,21 +32,9 @@ let stylesList = [
 
 gulp.task('scripts', () => {
     gulp.src(scriptsList)
-        .pipe(ngAnnotate())
         .pipe(concat('app.js'))
+        .pipe(minify())
         .pipe(gulp.dest('./dist'));
-});
-
-gulp.task('lint', function () {
-    return gulp.src(['**/*.js', '!node_modules/**'])
-        .pipe(eslint({
-            'rules': {
-                'quotes': [1, 'single'],
-                'semi': [1, 'always']
-            }
-        }))
-        .pipe(eslint.format())
-        .pipe(eslint.failOnError());
 });
 
 gulp.task('css', () => {
@@ -67,7 +52,7 @@ gulp.task('html', () => {
 
 gulp.task('inject', function () {
     gulp.src('./app/index.html')
-        .pipe(inject(gulp.src(['./dist/app.js', './dist/styles.css'], { read: false }), { ignorePath: 'dist' }))
+        .pipe(inject(gulp.src(['./dist/app-min.js', './dist/styles.css'], { read: false }), { ignorePath: 'dist' }))
         .pipe(gulp.dest('./dist'));
 });
 
