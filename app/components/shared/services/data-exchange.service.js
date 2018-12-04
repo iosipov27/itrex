@@ -10,6 +10,6 @@ angular.module('bookingComponentsModule').service('DataExchangeService', functio
     }
 
     this.clear = () => {
-        this._data = {};
+        this._data = Object.create(null);
     }
 });

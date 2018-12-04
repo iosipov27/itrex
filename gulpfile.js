@@ -26,15 +26,26 @@ let scriptsList = [
 let stylesList = [
     './app/style.css',
     './node_modules/bootstrap/dist/css/bootstrap.min.css',
-    './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css'
+    './node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
+    './node_modules/font-awesome/css/font-awesome.min.css'
 ];
 
+let fontsList = [
+    'node_modules/font-awesome/fonts/fontawesome-webfont.woff',
+    'node_modules/font-awesome/fonts/fontawesome-webfont.woff2',
+    'node_modules/font-awesome/fonts/fontawesome-webfont.ttf'
+]
 
 gulp.task('scripts', () => {
     gulp.src(scriptsList)
         .pipe(concat('app.js'))
         .pipe(minify())
         .pipe(gulp.dest('./dist'));
+});
+
+gulp.task('fonts', () => {
+    gulp.src(fontsList)
+        .pipe(gulp.dest('./dist/fonts'));
 });
 
 gulp.task('css', () => {
@@ -44,9 +55,7 @@ gulp.task('css', () => {
 });
 
 gulp.task('html', () => {
-    gulp.src([
-        './app/components/**/*.html'
-    ])
+    gulp.src('./app/components/**/*.html')
         .pipe(gulp.dest('./dist'));
 });
 
@@ -57,4 +66,4 @@ gulp.task('inject', function () {
 });
 
 
-gulp.task('default', ['scripts', 'css', 'html', 'inject']);
+gulp.task('default', ['scripts', 'css', 'fonts', 'html', 'inject']);
