@@ -4,7 +4,8 @@ angular.module('bookingApp').controller('AppCtrl',
 
             let vm = {};
             let activePanel = 'flights';
-            this.navList = [
+            let logs = [];
+            let navList = [
                 { label: 'flights', icon: 'fa fa-plane' },
                 { label: 'cars', icon: 'fa fa-car' },
                 { label: 'hotels', icon: 'fa fa-hotel' }];
@@ -12,9 +13,24 @@ angular.module('bookingApp').controller('AppCtrl',
 
             init();
             function init() {
-                vm.logs = LogService.get().map((item) => {
-                    if (item.type === 'hotels') {
-                        item.hotelRating = $sce.trustAsHtml(item.hotelRating);
+                initLogs();
+            };
+
+            function initLogs() {
+                logs = LogService.get().map((item) => {
+                    switch (item.type) {
+                        case 'hotels':
+                            item.icon = 'fa fa-hotel';
+                            item.description = $sce.trustAsHtml(item.hotelRating + ' - ' + item.location);
+                            break;
+                        case 'cars':
+                            item.icon = 'fa fa-car'
+                            item.description = item.carType + ' - ' + item.location;
+                            break;
+                        case 'flights':
+                            item.icon = 'fa fa-plane';
+                            item.description = item.fromDate + ' - ' + item.toDate;
+                            break;
                     }
                     return item;
                 });
@@ -28,25 +44,33 @@ angular.module('bookingApp').controller('AppCtrl',
                 LogService.push(formData);
                 this.clear();
                 init();
-            }
+            };
 
             this.clear = function () {
                 vm.startDate = null;
                 vm.endDate = null;
                 $scope.$broadcast('clear');
-            }
+            };
 
             this.removeLogByIndex = function (ind) {
                 LogService.removeByIndex(ind);
                 init();
-            }
+            };
+
+            this.getNavList = function () {
+                return navList;
+            };
+
+            this.getLogs = function () {
+                return logs;
+            };
 
             this.isPanelActive = function (panelName) {
                 return activePanel === panelName;
-            }
+            };
 
             this.setActivePanel = function (panelName) {
                 activePanel = panelName;
-            }
+            };
 
         }]);

@@ -46,7 +46,7 @@
 
       <div class="col-3">
         <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
-          <li class="nav-item" ng-repeat="nav in ctrl.navList">
+          <li class="nav-item" ng-repeat="nav in ctrl.getNavList()">
             <a href="#{{ ::nav.label }}" class="nav-link" ng-class="{active: ctrl.isPanelActive(nav.label)}" ng-click="ctrl.setActivePanel(nav.label)"><i
                 class="{{ ::nav.icon }}" aria-hidden="true"></i> {{ ::nav.label }}</a>
           </li>
@@ -59,28 +59,19 @@
           <div class="tab-pane fade show active" role="tabpanel">
             <form name="bookingForm" ng-submit="ctrl.search(bookingForm)" novalidate>
               <div class="form-row">
-                <div class="form-group col-md-6" >
+                <div class="form-group col-md-6">
                   <label>Start Date</label>
-                  <input type="text" 
-                        ng-class="{'has-error': bookingForm.startDate.$touched && bookingForm.startDate.$invalid}"
-                        class="form-control" 
-                        name="startDate" 
-                        ng-model="vm.startDate" 
-                        datepicker 
-                        required type="date" />
-                  <p ng-show="bookingForm.startDate.$invalid && bookingForm.startDate.$touched" class="help-block">Start Date is required</p>
+                  <input type="text" ng-class="{'has-error': bookingForm.startDate.$touched && bookingForm.startDate.$invalid}"
+                    class="form-control" name="startDate" ng-model="vm.startDate" datepicker required type="date" />
+                  <p ng-show="bookingForm.startDate.$invalid && bookingForm.startDate.$touched" class="help-block">Start
+                    Date is required</p>
                 </div>
                 <div class="form-group col-md-6">
                   <label>End Date</label>
-                  <input type="text"
-                        ng-class="{'has-error': bookingForm.endDate.$touched && bookingForm.endDate.$invalid}"
-                        class="form-control" 
-                        ng-model="vm.endDate"
-                        name="endDate" 
-                        required 
-                        datepicker 
-                        type="date"/>
-                  <p ng-show="bookingForm.endDate.$invalid && bookingForm.endDate.$touched" class="help-block">End Date is required</p>      
+                  <input type="text" ng-class="{'has-error': bookingForm.endDate.$touched && bookingForm.endDate.$invalid}"
+                    class="form-control" ng-model="vm.endDate" name="endDate" required datepicker type="date" />
+                  <p ng-show="bookingForm.endDate.$invalid && bookingForm.endDate.$touched" class="help-block">End Date
+                    is required</p>
                 </div>
               </div>
 
@@ -90,7 +81,7 @@
 
               <div class="form-group">
                 <a ng-click="ctrl.clear()" href="javascript:void(0);">Clear</a>
-                <button type="submit"  ng-disabled="bookingForm.$invalid" class="btn btn-primary">Search</button>
+                <button type="submit" ng-disabled="bookingForm.$invalid" class="btn btn-primary">Search</button>
               </div>
             </form>
           </div>
@@ -101,34 +92,16 @@
 
     <div class="row">
       <div class="col">
-
         <ul class="list-group">
-          <li class="list-group-item" ng-repeat="log in vm.logs" ng-switch on="log.type">
-            <div ng-switch-when='flights'>
-              <i class="fa fa-plane" aria-hidden="true"></i>
-              <span>&nbsp;{{ ::log.startDate | formattedDate : 'MMMM dd' }} - {{ ::log.endDate | formattedDate : 'MMMM dd' }}, {{
-                ::log.fromDate }} - {{ ::log.toDate }}
-              </span>
-            </div>
-            <div ng-switch-when='cars'>
-              <i class="fa fa-car" aria-hidden="true"></i>
-              <span>&nbsp;{{ ::log.startDate | formattedDate : 'MMMM dd' }} - {{ ::log.endDate | formattedDate : 'MMMM dd' }}, {{ ::log.carType
-                }} - {{ ::log.location }}
-              </span>
-            </div>
-            <div ng-switch-when='hotels'>
-              <i class="fa fa-bed" aria-hidden="true"></i>
-              <span>&nbsp;{{ ::log.startDate | formattedDate : 'MMMM dd' }} - {{ ::log.endDate | formattedDate : 'MMMM dd' }}, <span
-                  ng-bind-html="log.hotelRating"></span> - {{ ::log.location }}
-              </span>
-
-            </div>
+          <li class="list-group-item" ng-repeat="log in ctrl.getLogs()">
+            <i ng-class="log.icon" aria-hidden="true"></i>
+            <span>&nbsp;{{ ::log.startDate | formattedDate : 'MMMM dd' }} - {{ ::log.endDate | formattedDate : 'MMMM
+              dd' }}, {{ ::log.type !== 'hotels' ? log.description : '' }} <span ng-if="log.type === 'hotels'" ng-bind-html="log.description"></span>
+            </span>
             <div class="list-close-icon">
               <i class="fa fa-window-close" aria-hidden="true" ng-click="ctrl.removeLogByIndex($index)"></i>
             </div>
-
           </li>
-
         </ul>
       </div>
     </div>
