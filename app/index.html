@@ -28,6 +28,8 @@
   <script src="shared/services/log.service.js"></script>
   <script src="shared/services/hotels.services.js"></script>
   <script src="shared/services/cars.service.js"></script>
+  <script src="shared/services/navigation.service.js"></script>
+
 
   <script src="shared/directives/datepicker.directive.js"></script>
   <script src="shared/filters/formattedDate.filter.js"></script>
@@ -47,8 +49,9 @@
       <div class="col-3">
         <ul class="nav nav-tabs nav-tabs--vertical nav-tabs--left" role="navigation">
           <li class="nav-item" ng-repeat="nav in ctrl.getNavList()">
-            <a href="#{{ ::nav.label }}" class="nav-link" ng-class="{active: ctrl.isPanelActive(nav.label)}" ng-click="ctrl.setActivePanel(nav.label)"><i
-                class="{{ ::nav.icon }}" aria-hidden="true"></i> {{ ::nav.label }}</a>
+            <a href="#{{ ::nav.label }}" class="nav-link" ng-class="{active: ctrl.isPanelActive(nav.label)}" >
+              <i class="{{ ::nav.icon }}" aria-hidden="true"></i> {{ ::nav.label }}
+            </a>
           </li>
         </ul>
       </div>

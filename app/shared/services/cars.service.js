@@ -6,7 +6,7 @@ angular.module('sharedModule').factory('CarsService', function () {
         { label: 'Economy', value: 'Economy' }
     ]
     
-    CarsService.getCarsTypes = function () {
+    CarsService.getCarsTypes = () => {
         return mockData;
     }
 

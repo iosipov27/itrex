@@ -8,14 +8,14 @@ angular.module('sharedModule').service('LogService', function () {
         localStorage.setItem('storedData', JSON.stringify(data));
     }
 
-    this.push = function (dataItem) {
+    this.push = (dataItem) => {
         let storedData = getStoredData();
 
         storedData.push(dataItem);
         saveData(storedData);
     };
 
-    this.removeByIndex = function (ind) {
+    this.removeByIndex = (ind) => {
         let storedData = getStoredData();
 
         storedData.splice(ind, 1);
@@ -24,7 +24,7 @@ angular.module('sharedModule').service('LogService', function () {
 
     this.get = getStoredData;
 
-    this.clear = function () {
+    this.clear = () => {
         localStorage.clear();
     };
 });

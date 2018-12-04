@@ -1,17 +1,54 @@
 angular.module('bookingApp').controller('AppCtrl',
-    ['$scope', 'DataExchangeService', 'LogService', '$sce',
-        function ($scope, DataExchangeService, LogService, $sce) {
+    ['$scope', 'DataExchangeService', 'LogService', '$sce', 'NavigationService',
+        function ($scope, DataExchangeService, LogService, $sce, NavigationService) {
 
-            let activePanel = 'flights';
-            let logs = [];
-            let navList = [
-                { label: 'flights', icon: 'fa fa-plane' },
-                { label: 'cars', icon: 'fa fa-car' },
-                { label: 'hotels', icon: 'fa fa-hotel' }];
+            let activePanel;
+            let logs;
 
-            init();
+            init.call(this);
             function init() {
                 initLogs();
+            };
+
+            this.search = (isValid) => {
+                if (!isValid) return;
+
+                $scope.$broadcast('search');
+
+                let formData = angular.extend(
+                    DataExchangeService.get('internalFormData'),
+                    { startDate: this.startDate, endDate: this.endDate }
+                );
+                LogService.push(formData);
+                this.clear();
+                initLogs();
+            };
+
+            $scope.$on('$routeChangeSuccess', function (event, current, previous, reject) {
+                activePanel = current.$$route.originalPath.replace(/\//, "");
+            })
+
+            this.clear = () => {
+                this.startDate = null;
+                this.endDate = null;
+                $scope.$broadcast('clear');
+            };
+
+            this.removeLogByIndex = (ind) => {
+                LogService.removeByIndex(ind);
+                initLogs();
+            };
+
+            this.getNavList = () => {
+                return NavigationService.getNavigationsList();;
+            };
+
+            this.getLogs = () => {
+                return logs;
+            };
+
+            this.isPanelActive = (panelName) => {
+                return activePanel === panelName;
             };
 
             function initLogs() {
@@ -33,43 +70,5 @@ angular.module('bookingApp').controller('AppCtrl',
                     return item;
                 });
             }
-
-            this.search = function (isValid) {
-                if (!isValid) return;
-
-                $scope.$broadcast('search');
-
-                let formData = angular.extend(DataExchangeService.get('internalFormData'), { startDate: this.startDate, endDate: this.endDate });
-                LogService.push(formData);
-                this.clear();
-                init();
-            };
-
-            this.clear = function () {
-                this.startDate = null;
-                this.endDate = null;
-                $scope.$broadcast('clear');
-            };
-
-            this.removeLogByIndex = function (ind) {
-                LogService.removeByIndex(ind);
-                init();
-            };
-
-            this.getNavList = function () {
-                return navList;
-            };
-
-            this.getLogs = function () {
-                return logs;
-            };
-
-            this.isPanelActive = function (panelName) {
-                return activePanel === panelName;
-            };
-
-            this.setActivePanel = function (panelName) {
-                activePanel = panelName;
-            };
 
         }]);

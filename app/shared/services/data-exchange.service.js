@@ -1,15 +1,15 @@
 angular.module('sharedModule').service('DataExchangeService', function () {
     this._data = Object.create(null);
-    
-    this.set = function (fieldName, data) {
+
+    this.set = (fieldName, data) => {
         this._data[fieldName] = data;
     }
 
-    this.get = function (fieldName) {
+    this.get = (fieldName) => {
         return this._data[fieldName];
     }
 
-    this.clear = function () {
+    this.clear = () => {
         this._data = {};
     }
 });
