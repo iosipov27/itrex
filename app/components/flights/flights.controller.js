@@ -1,21 +1,18 @@
 angular.module('bookingComponentsModule').controller('FlightsCtrl', ['$scope', 'DataExchangeService',
     function ($scope, DataExchangeService) {
 
-        let vm = {};
-        $scope.vmFlCtrl = vm;
-
-        init();
+        init.call(this);
         function init() {
-            vm.type = 'flights';
+            this.type = 'flights';
         }
 
-        $scope.$watchGroup(['vmFlCtrl.fromDate', 'vmFlCtrl.toDate'], () => {
-            DataExchangeService.set('internalFormData', $scope.vmFlCtrl);
+        $scope.$on('search', () => {
+            DataExchangeService.set('internalFormData', { fromDate: this.fromDate, toDate: this.toDate, type: this.type });
         });
 
         $scope.$on('clear', () => {
-            vm.fromDate = null;
-            vm.toDate = null;
+            this.fromDate = null;
+            this.toDate = null;
         });
 
     }]);

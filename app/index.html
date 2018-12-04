@@ -53,23 +53,22 @@
         </ul>
       </div>
 
-
       <div class="col-6">
         <div class="tab-content">
           <div class="tab-pane fade show active" role="tabpanel">
-            <form name="bookingForm" ng-submit="ctrl.search(bookingForm)" novalidate>
+            <form name="bookingForm" ng-submit="ctrl.search(bookingForm.$valid); bookingForm.$setUntouched()" novalidate>
               <div class="form-row">
                 <div class="form-group col-md-6">
                   <label>Start Date</label>
                   <input type="text" ng-class="{'has-error': bookingForm.startDate.$touched && bookingForm.startDate.$invalid}"
-                    class="form-control" name="startDate" ng-model="vm.startDate" datepicker required type="date" />
+                    class="form-control" name="startDate" ng-model="ctrl.startDate" datepicker required type="date" />
                   <p ng-show="bookingForm.startDate.$invalid && bookingForm.startDate.$touched" class="help-block">Start
                     Date is required</p>
                 </div>
                 <div class="form-group col-md-6">
                   <label>End Date</label>
                   <input type="text" ng-class="{'has-error': bookingForm.endDate.$touched && bookingForm.endDate.$invalid}"
-                    class="form-control" ng-model="vm.endDate" name="endDate" required datepicker type="date" />
+                    class="form-control" ng-model="ctrl.endDate" name="endDate" required datepicker type="date" />
                   <p ng-show="bookingForm.endDate.$invalid && bookingForm.endDate.$touched" class="help-block">End Date
                     is required</p>
                 </div>
@@ -87,7 +86,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div class="row">

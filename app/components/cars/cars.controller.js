@@ -1,23 +1,19 @@
 angular.module('bookingComponentsModule').controller('CarsCtrl', ['$scope', 'CarsService', 'DataExchangeService',
   function ($scope, CarsService, DataExchangeService) {
 
-    let vm = {};
-    $scope.vmCarsCtrl = vm;
-
-    init();
+    init.call(this);
     function init() {
-      vm.type = 'cars';
-      vm.carsTypes = CarsService.getCarsTypes();
+      this.type = 'cars';
+      this.carsTypes = CarsService.getCarsTypes();
     }
 
-    $scope.$watchGroup(['vmCarsCtrl.carType', 'vmCarsCtrl.location'], () => {
-      DataExchangeService.set('internalFormData', { carType: vm.carType, location: vm.location, type: vm.type });
+    $scope.$on('search', () => {
+      DataExchangeService.set('internalFormData', { carType: this.carType, location: this.location, type: this.type });
     });
 
-
     $scope.$on('clear', () => {
-      vm.carType = null;
-      vm.location = null;
+      this.carType = null;
+      this.location = null;
     });
 
   }]);

@@ -2,14 +2,12 @@ angular.module('bookingApp').controller('AppCtrl',
     ['$scope', 'DataExchangeService', 'LogService', '$sce',
         function ($scope, DataExchangeService, LogService, $sce) {
 
-            let vm = {};
             let activePanel = 'flights';
             let logs = [];
             let navList = [
                 { label: 'flights', icon: 'fa fa-plane' },
                 { label: 'cars', icon: 'fa fa-car' },
                 { label: 'hotels', icon: 'fa fa-hotel' }];
-            $scope.vm = vm;
 
             init();
             function init() {
@@ -36,19 +34,20 @@ angular.module('bookingApp').controller('AppCtrl',
                 });
             }
 
-            this.search = function (bookingForm) {
-                if (!bookingForm.$valid) return;
-                bookingForm.$setUntouched();
+            this.search = function (isValid) {
+                if (!isValid) return;
 
-                let formData = angular.extend(DataExchangeService.get('internalFormData'), { startDate: vm.startDate, endDate: vm.endDate });
+                $scope.$broadcast('search');
+
+                let formData = angular.extend(DataExchangeService.get('internalFormData'), { startDate: this.startDate, endDate: this.endDate });
                 LogService.push(formData);
                 this.clear();
                 init();
             };
 
             this.clear = function () {
-                vm.startDate = null;
-                vm.endDate = null;
+                this.startDate = null;
+                this.endDate = null;
                 $scope.$broadcast('clear');
             };
 

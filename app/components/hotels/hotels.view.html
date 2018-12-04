@@ -1,9 +1,9 @@
 <div class="form-group">
-    <label for="hotelRating">Amenities</label>
-    <select class="form-control" ng-model="vmHotCtrl.hotelRating" id="hotelRating">
-        <option ng-repeat="option in vmHotCtrl.ratings" value="{{::option.value}}" ng-bind-html="option.label"></option>
+    <label>Amenities</label>
+    <select class="form-control" ng-model="hotels.hotelRating">
+        <option ng-repeat="option in hotels.ratings" value="{{::option.value}}" ng-bind-html="option.label"></option>
     </select>
 
-    <label for="hotelLocation">Location</label>
-    <input type="text" class="form-control" ng-model="vmHotCtrl.location" id="hotelLocation" />
+    <label>Location</label>
+    <input type="text" class="form-control" ng-model="hotels.location" />
 </div>

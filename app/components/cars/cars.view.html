@@ -1,9 +1,9 @@
 <div class="form-group">
-    <label for="carType">Type</label>
-    <select class="form-control" ng-model="vmCarsCtrl.carType" id="carType">
-        <option ng-repeat="option in vmCarsCtrl.carsTypes" value="{{::option.value}}">{{::option.label}}</option>
+    <label>Type</label>
+    <select class="form-control" ng-model="cars.carType">
+        <option ng-repeat="option in cars.carsTypes" value="{{::option.value}}">{{::option.label}}</option>
     </select>
 
     <label for="location">Location</label>
-    <input type="text" class="form-control" ng-model="vmCarsCtrl.location" id="location"/>
+    <input type="text" class="form-control" ng-model="cars.location" id="location"/>
 </div>

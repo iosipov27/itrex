@@ -5,15 +5,15 @@ angular.
             $routeProvider.
                 when('/flights', {
                     templateUrl: 'components/flights/flights.view.html',
-                    controller: 'FlightsCtrl'
+                    controller: 'FlightsCtrl as flights'
                 }).
                 when('/cars', {
                     templateUrl: 'components/cars/cars.view.html',
-                    controller: 'CarsCtrl'
+                    controller: 'CarsCtrl as cars'
                 }).
                 when('/hotels', {
                     templateUrl: 'components/hotels/hotels.view.html',
-                    controller: 'HotelsCtrl'
+                    controller: 'HotelsCtrl as hotels'
                 }).
                 otherwise({
                     redirectTo: '/flights'
