@@ -1,4 +1,4 @@
-angular.module('sharedModule').service('NavigationService', function () {
+angular.module('sharedModule').service('NavigationService', () => {
     let mockData = [
         { label: 'flights', icon: 'fa fa-plane' },
         { label: 'cars', icon: 'fa fa-car' },

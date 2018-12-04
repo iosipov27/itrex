@@ -1,4 +1,4 @@
-angular.module('sharedModule').service('HotelsService', function () {
+angular.module('sharedModule').service('HotelsService', () => {
     let mockData = [
         { label: '&#9733; and higher', value: '&#9733;' },
         { label: '&#9733; &#9733; and higher', value: '&#9733; &#9733;' },

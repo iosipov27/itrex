@@ -1,14 +1,12 @@
-angular.module('sharedModule').factory('CarsService', function () {
-    let CarsService = Object.create(null);
+angular.module('sharedModule').service('CarsService', function () {
+
     let mockData = [
         { label: 'Economy', value: 'Economy' },
         { label: 'Buisness', value: 'Buisness' },
         { label: 'Economy', value: 'Economy' }
     ]
     
-    CarsService.getCarsTypes = () => {
+    this.getCarsTypes = () => {
         return mockData;
     }
-
-    return CarsService;
 });

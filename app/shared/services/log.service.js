@@ -1,4 +1,4 @@
-angular.module('sharedModule').service('LogService', function () {
+angular.module('sharedModule').service('LogService', [() => {
 
     function getStoredData() {
         return JSON.parse(localStorage.getItem("storedData")) || [];
@@ -27,4 +27,4 @@ angular.module('sharedModule').service('LogService', function () {
     this.clear = () => {
         localStorage.clear();
     };
-});
+}]);

@@ -1,4 +1,4 @@
-angular.module('sharedModule').service('DataExchangeService', function () {
+angular.module('sharedModule').service('DataExchangeService', () => {
     this._data = Object.create(null);
 
     this.set = (fieldName, data) => {
