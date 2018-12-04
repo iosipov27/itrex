@@ -8,10 +8,12 @@ angular.module('bookingApp').controller('AppCtrl',
             init.call(this);
             function init() {
                 initLogs();
-            };
+            }
 
             this.search = (isValid) => {
-                if (!isValid) return;
+                if (!isValid) {
+                    return;
+                }
 
                 $scope.$broadcast('search');
 
@@ -26,7 +28,7 @@ angular.module('bookingApp').controller('AppCtrl',
 
             $scope.$on('$routeChangeSuccess', function (event, current, previous, reject) {
                 activePanel = current.$$route.originalPath.replace(/\//, "");
-            })
+            });
 
             this.clear = () => {
                 this.startDate = null;
@@ -40,7 +42,7 @@ angular.module('bookingApp').controller('AppCtrl',
             };
 
             this.getNavList = () => {
-                return NavigationService.getNavigationsList();;
+                return NavigationService.getNavigationsList();
             };
 
             this.getLogs = () => {
@@ -59,7 +61,7 @@ angular.module('bookingApp').controller('AppCtrl',
                             item.description = $sce.trustAsHtml(item.hotelRating + ' - ' + item.location);
                             break;
                         case 'cars':
-                            item.icon = 'fa fa-car'
+                            item.icon = 'fa fa-car';
                             item.description = item.carType + ' - ' + item.location;
                             break;
                         case 'flights':

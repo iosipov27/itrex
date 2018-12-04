@@ -6,5 +6,5 @@ angular.module('bookingComponentsModule').service('NavigationService', function 
     
     this.getNavigationsList = () => {
         return mockData;
-    }
+    };
 });

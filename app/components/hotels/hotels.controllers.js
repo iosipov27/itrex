@@ -5,7 +5,7 @@ angular.module('bookingComponentsModule').controller('HotelsCtrl', ['$scope', 'H
     function init() {
       this.type = 'hotels';
       this.ratings = HotelsService.getRatingsList().map((item) => {
-        return { value: item.value, label: $sce.trustAsHtml(item.label) }
+        return { value: item.value, label: $sce.trustAsHtml(item.label) };
       });
     }
 

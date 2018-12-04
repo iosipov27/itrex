@@ -4,5 +4,5 @@ angular.module('bookingComponentsModule').directive('datepicker', () => {
         link: function (scope, element, attrs) {
             element.datepicker();
         }
-    }
+    };
 });
