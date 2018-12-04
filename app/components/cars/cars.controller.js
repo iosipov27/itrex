@@ -1,5 +1,5 @@
 angular.module('bookingComponentsModule').controller('CarsCtrl', ['$scope', 'CarsService', 'DataExchangeService',
-   ($scope, CarsService, DataExchangeService) => {
+   function ($scope, CarsService, DataExchangeService) {
 
     init.call(this);
     function init() {

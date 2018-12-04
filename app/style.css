@@ -19,8 +19,8 @@
   border-color: transparent;
 }
 .nav-tabs--left .nav-link.active {
-  border-bottom-color: #ddd;
-  border-right-color: #fff;
+  border-bottom-color: #ddd !important;
+  border-right-color: #fff !important;
   border-bottom-left-radius: 0.25rem;
   border-top-right-radius: 0;
   margin-right: -1px;
