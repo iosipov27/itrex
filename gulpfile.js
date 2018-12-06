@@ -2,6 +2,7 @@ let gulp = require('gulp'),
     concat = require('gulp-concat'),
     minify = require('gulp-minify'),
     inject = require('gulp-inject'),
+    es = require('event-stream'),
     cleanCSS = require('gulp-clean-css');
 
 
@@ -37,35 +38,33 @@ let fontsList = [
     'node_modules/font-awesome/fonts/fontawesome-webfont.ttf'
 ]
 
-gulp.task('scripts', () => {
-    gulp.src(scriptsList)
-        .pipe(concat('app.js'))
-        .pipe(minify())
-        .pipe(gulp.dest('./dist'));
-});
+let dest = './dist';
+
+
+let scriptsStream = gulp.src(scriptsList)
+    .pipe(concat('app.js'))
+    .pipe(minify({noSource: true}))
+    .pipe(gulp.dest(dest));
 
 gulp.task('fonts', () => {
     gulp.src(fontsList)
-        .pipe(gulp.dest('./dist/fonts'));
+        .pipe(gulp.dest(dest + '/fonts'));
 });
 
-gulp.task('css', () => {
-    gulp.src(stylesList)
-        .pipe(concat('styles.css'))
-        .pipe(cleanCSS({compatibility: 'ie8'}))
-        .pipe(gulp.dest('./dist'));
-});
+let stylesStream = gulp.src(stylesList)
+    .pipe(concat('styles.css'))
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(gulp.dest(dest));
 
 gulp.task('html', () => {
     gulp.src('./app/components/**/*.html')
-        .pipe(gulp.dest('./dist'));
+        .pipe(gulp.dest(dest));
 });
 
 gulp.task('inject', function () {
     gulp.src('./app/index.html')
-        .pipe(inject(gulp.src(['./dist/app-min.js', './dist/styles.css'], { read: false }), { ignorePath: 'dist' }))
-        .pipe(gulp.dest('./dist'));
+        .pipe(inject(es.merge(stylesStream, scriptsStream), { ignorePath: 'dist' }))
+        .pipe(gulp.dest(dest));
 });
 
-
-gulp.task('default', ['scripts', 'css', 'fonts', 'html', 'inject']);
+gulp.task('default', ['fonts', 'html', 'inject']);
