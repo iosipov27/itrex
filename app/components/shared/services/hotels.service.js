@@ -4,7 +4,7 @@ angular.module('bookingComponentsModule').service('HotelsService', function () {
         { label: '&#9733; &#9733; and higher', value: '&#9733; &#9733;' },
         { label: '&#9733; &#9733; &#9733; and higher', value: '&#9733; &#9733; &#9733;' },
         { label: '&#9733; &#9733; &#9733; &#9733; and higher', value: '&#9733; &#9733; &#9733; &#9733;' },
-        { label: '&#9733; &#9733; &#9733; &#9733; &#9733; and higher', value: '&#9733; &#9733; &#9733; &#9733; &#9733;' }
+        { label: '&#9733; &#9733; &#9733; &#9733; &#9733;', value: '&#9733; &#9733; &#9733; &#9733; &#9733;' }
     ];
     
     this.getRatingsList = () => {
